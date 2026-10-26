@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cl.bennu.controljornadabackend.mapper.CityMapper">
+
+    <resultMap id="cityMap" type="cl.bennu.controljornadabackend.model.City">
+        <id property="id" column="id"/>
+        <result property="regionId" column="region_id"/>
+        <result property="name" column="name"/>
+    </resultMap>
+
+    <sql id="sqlCity">
+        <!-- @formatter:off -->
+        SELECT
+        c.id
+        , c.region_id
+        , c.name
+        FROM city c
+        <!-- @formatter:on -->
+    </sql>
+
+    <select id="getAll" resultMap="cityMap">
+        <include refid="sqlCity"/>
+    </select>
+
+    <select id="get" resultMap="cityMap" parameterType="java.lang.Long">
+        <include refid="sqlCity"/>
+        WHERE c.id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="cl.bennu.controljornadabackend.model.City" keyProperty="id" useGeneratedKeys="true">
+        <!-- @formatter:off -->
+        INSERT INTO city (
+        id
+        , region_id
+        , name
+        ) VALUES (
+        #{id}
+        , #{regionId}
+        , #{name}
+        )
+        <!-- @formatter:on -->
+    </insert>
+
+    <update id="update" parameterType="cl.bennu.controljornadabackend.model.City">
+        <!-- @formatter:off -->
+        UPDATE city SET
+        region_id = #{regionId}
+        , name = #{name}
+        WHERE id = #{id}
+        <!-- @formatter:on -->
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM city WHERE id = #{id}
+    </delete>
+
+</mapper>
