@@ -29,7 +29,7 @@
         WHERE c.id = #{id}
     </select>
 
-    <insert id="insert" parameterType="cl.bennu.controljornadabackend.model.City" keyProperty="id" useGeneratedKeys="true">
+    <insert id="insert" parameterType="cl.bennu.controljornadabackend.model.City">
         <!-- @formatter:off -->
         INSERT INTO city (
         id
@@ -52,7 +52,7 @@
         <!-- @formatter:on -->
     </update>
 
-    <delete id="deleteById">
+    <delete id="delete">
         DELETE FROM city WHERE id = #{id}
     </delete>
 
