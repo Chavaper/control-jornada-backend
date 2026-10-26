@@ -41,7 +41,7 @@
         WHERE id = #{id}
     </update>
 
-    <delete id="deleteById">
+    <delete id="delete">
         DELETE FROM contract_type WHERE id = #{id}
     </delete>
 
