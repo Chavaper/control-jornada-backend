@@ -1,0 +1,41 @@
+#@formatter:off
+spring:
+  profiles:
+    active: ${PROFILES:default}
+  application:
+    name: #project.artifactId#
+  banner:
+    location: classpath:/banner
+  main:
+    banner-mode: log
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:template-db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;INIT=RUNSCRIPT FROM 'classpath:db/schema.sql'
+    username: h2
+    password:
+
+mybatis:
+  config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath:/mapper/**/*.xml
+
+logging:
+  pattern:
+    dateformat: yyyy-MM-dd HH:mm:ss.SSS
+
+management:
+  endpoints:
+    web:
+      base-path: /v1/template/health/
+      exposure:
+        include: "health,info,prometheus"
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+server:
+  port: ${PORT:8080}
+  error:
+    include-message: always
+  compression:
+    enabled: ${COMPRESSION_ENABLED:true}
+    mime-types: application/json
