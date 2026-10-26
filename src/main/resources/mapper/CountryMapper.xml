@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cl.bennu.controljornadabackend.mapper.CountryMapper">
+
+    <resultMap id="CountryResultMap" type="cl.bennu.controljornadabackend.model.Country">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="nationality" column="nationality"/>
+    </resultMap>
+
+    <sql id="CountryColumns">
+        id, name, nationality
+    </sql>
+
+    <select id="findById" parameterType="java.lang.Integer" resultMap="CountryResultMap">
+        SELECT <include refid="CountryColumns"/>
+        FROM country
+        WHERE id = #{id}
+    </select>
+
+    <insert id="insert"
+            parameterType="cl.bennu.controljornadabackend.model.Country">
+        INSERT INTO country (id, name, nationality)
+        VALUES (#{id}, #{name}, #{nationality})
+    </insert>
+
+    <select id="findAll" resultMap="CountryResultMap">
+        SELECT <include refid="CountryColumns"/>
+        FROM country
+        ORDER BY id
+    </select>
+
+    <update id="update"
+            parameterType="cl.bennu.controljornadabackend.model.Country">
+        UPDATE country
+        SET name = #{name},
+        nationality = #{nationality}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        DELETE FROM country
+        WHERE id = #{id}
+    </delete>
+
+</mapper>

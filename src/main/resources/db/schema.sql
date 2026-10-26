@@ -1,19 +1,16 @@
 -- @formatter:off
-DROP TABLE IF EXISTS example;
+DROP TABLE IF EXISTS country;
 
-CREATE TABLE example (
-    id SERIAL PRIMARY KEY
-    , name VARCHAR(255) NOT NULL
-    , code VARCHAR(60) UNIQUE NOT NULL
-    , description TEXT NULL
-    , date DATE NULL
-    , date_time TIMESTAMP NULL
-    , active BOOLEAN NOT NULL
+CREATE TABLE country (
+    id INTEGER NOT NULL
+    , name VARCHAR(200) NOT NULL
+    , nationality VARCHAR(200) NOT NULL
+
+    , PRIMARY KEY (id)
+    , UNIQUE(id)
+    , UNIQUE(name)
 );
 
 
-INSERT INTO example (name, code, description, date, active)
-VALUES ('Template One', 'TPL001', 'This is the first example.', '2024-01-15', TRUE)
-       , ('Template Two', 'TPL002', 'This is the second example.', '2024-02-20', FALSE)
-       , ('Template Three', 'TPL003', 'This is the third example.', NULL, TRUE)
-;
+INSERT INTO country (id, name, nationality) VALUES
+    (1, 'Chile', 'Chilena');
