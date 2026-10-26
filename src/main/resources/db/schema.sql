@@ -11,6 +11,5 @@ CREATE TABLE country (
     , UNIQUE(name)
 );
 
-
 INSERT INTO country (id, name, nationality) VALUES
     (1, 'Chile', 'Chilena');

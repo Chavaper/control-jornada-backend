@@ -1,6 +1,7 @@
 package cl.bennu.controljornadabackend.service;
 
 import cl.bennu.controljornadabackend.controller.base.RecursoNoEncontradoException;
+
 import cl.bennu.controljornadabackend.mapper.CountryMapper;
 import cl.bennu.controljornadabackend.model.Country;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,6 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public Integer insert(Country country) {
-        countryMapper.findById(country.getId());
         return countryMapper.insert(country);
     }
 
@@ -35,13 +35,13 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public void update(Country country) {
-        countryMapper.findById(country.getId());
+        findById(country.getId());
         countryMapper.update(country);
     }
 
     @Override
     public int deleteById(Integer id) {
-        countryMapper.findById(id);
+        findById(id);
         return countryMapper.deleteById(id);
     }
 }

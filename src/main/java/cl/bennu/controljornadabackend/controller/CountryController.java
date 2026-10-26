@@ -36,7 +36,6 @@ public class CountryController {
     @PutMapping("/{id}")
     public ResponseEntity<Void> update(@PathVariable Integer id,
                                            @Valid @RequestBody Country country) {
-        country.setId(id);
         countryService.update(country);
         return ResponseEntity.noContent().build();
     }
