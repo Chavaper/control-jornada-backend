@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cl.bennu.controljornadabackend.mapper.JustificationTypeMapper">
+
+    <resultMap id="justificationTypeMap" type="cl.bennu.controljornadabackend.model.JustificationType">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+    </resultMap>
+
+    <sql id="sqlJustificationType">
+        <!-- @formatter:off -->
+        SELECT
+            j.id
+            , j.name
+        FROM justification_type j
+        <!-- @formatter:on -->
+    </sql>
+
+    <select id="getAll" resultMap="justificationTypeMap">
+        <include refid="sqlJustificationType"/>
+    </select>
+
+    <select id="get" resultMap="justificationTypeMap" parameterType="java.lang.Long">
+        <include refid="sqlJustificationType"/>
+        WHERE j.id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="cl.bennu.controljornadabackend.model.JustificationType" keyProperty="id" useGeneratedKeys="true">
+        <!-- @formatter:off -->
+        INSERT INTO justificationType (
+            name
+        ) VALUES (
+            #{name}
+        )
+        <!-- @formatter:on -->
+    </insert>
+
+    <update id="update" parameterType="cl.bennu.controljornadabackend.model.JustificationType">
+        <!-- @formatter:off -->
+        UPDATE justificationType SET
+            name = #{name}
+        WHERE id = #{id}
+        <!-- @formatter:on -->
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM justificationType WHERE id = #{id}
+    </delete>
+
+</mapper>
