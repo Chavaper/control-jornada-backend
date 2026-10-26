@@ -1,0 +1,36 @@
+ALTER TABLE register            DROP CONSTRAINT IF EXISTS register_employee_id_fkey;
+ALTER TABLE register            DROP CONSTRAINT IF EXISTS register_justification_id_fkey;
+ALTER TABLE justification       DROP CONSTRAINT IF EXISTS justification_justification_type_id_fkey;
+ALTER TABLE employee            DROP CONSTRAINT IF EXISTS employee_branch_id_fkey;
+ALTER TABLE employee            DROP CONSTRAINT IF EXISTS employee_job_scheduler_id_fkey;
+ALTER TABLE employee            DROP CONSTRAINT IF EXISTS employee_commune_id_fkey;
+ALTER TABLE employee            DROP CONSTRAINT IF EXISTS employee_nationality_id_fkey;
+ALTER TABLE employee            DROP CONSTRAINT IF EXISTS employee_gender_id_fkey;
+ALTER TABLE employee            DROP CONSTRAINT IF EXISTS employee_marital_status_id_fkey;
+ALTER TABLE employee            DROP CONSTRAINT IF EXISTS employee_contract_type_id_fkey;
+ALTER TABLE employee            DROP CONSTRAINT IF EXISTS employee_job_type_id_fkey;
+ALTER TABLE branch              DROP CONSTRAINT IF EXISTS branch_company_id_fkey;
+ALTER TABLE city                DROP CONSTRAINT IF EXISTS city_region_id_fkey;
+ALTER TABLE commune             DROP CONSTRAINT IF EXISTS commune_city_id_fkey;
+ALTER TABLE region              DROP CONSTRAINT IF EXISTS region_country_id_fkey;
+ALTER TABLE company             DROP CONSTRAINT IF EXISTS company_commune_id_fkey;
+ALTER TABLE job_type            DROP CONSTRAINT IF EXISTS job_type_company_id_fkey;
+
+DROP TABLE IF EXISTS register;
+DROP TABLE IF EXISTS justification;
+DROP TABLE IF EXISTS employee;
+DROP TABLE IF EXISTS job_scheduler;
+DROP TABLE IF EXISTS job_type;
+DROP TABLE IF EXISTS branch;
+DROP TABLE IF EXISTS company;
+DROP TABLE IF EXISTS commune;
+DROP TABLE IF EXISTS city;
+DROP TABLE IF EXISTS region;
+DROP TABLE IF EXISTS contract_type;
+DROP TABLE IF EXISTS country;
+DROP TABLE IF EXISTS gender;
+DROP TABLE IF EXISTS marital_status;
+DROP TABLE IF EXISTS justification_type;
+DROP TABLE IF EXISTS staff;
+
+DROP INDEX IF EXISTS only_one_owner_per_company;
