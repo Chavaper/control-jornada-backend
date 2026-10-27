@@ -1,49 +1,49 @@
 package cl.bennu.controljornadabackend.controller;
 
+import cl.bennu.controljornadabackend.constants.Constants;
+import cl.bennu.controljornadabackend.controller.base.BaseController;
 import cl.bennu.controljornadabackend.model.Country;
 import cl.bennu.controljornadabackend.service.CountryService;
-import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequiredArgsConstructor
-@RequestMapping("/api/country")
-public class CountryController {
+@RequestMapping(path = Constants.BASE_API, produces = MediaType.APPLICATION_JSON_VALUE)
+public class CountryController extends BaseController {
 
-    private final CountryService countryService;
+    private static final String ENDPOINT = "/country";
 
-    @GetMapping
-    public ResponseEntity<List<Country>> listar() {
-        return ResponseEntity.ok(countryService.findAll());
+    private @Autowired CountryService countryService;
+
+    @GetMapping(ENDPOINT)
+    public ResponseEntity<?> getAll() {
+        List<Country> list = countryService.getAll();
+        return ok(list);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Country> buscarPorId(@PathVariable Integer id) {
-        return ResponseEntity.ok(countryService.findById(id));
+    @PostMapping(ENDPOINT)
+    public ResponseEntity<?> save(@RequestBody Country country) {
+        countryService.save(country);
+        return ok(country);
     }
 
-    @PostMapping
-    public ResponseEntity<Country> insert(@Valid @RequestBody Country country) {
-        countryService.insert(country);
-        return ResponseEntity.status(HttpStatus.CREATED).body(country);
+    @GetMapping(ENDPOINT + "/{id}")
+    public ResponseEntity<?> getById(@PathVariable Long id) {
+        Country country = countryService.getById(id);
+        if (country == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ok(country);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Void> update(@PathVariable Integer id,
-                                           @Valid @RequestBody Country country) {
-        countryService.update(country);
-        return ResponseEntity.noContent().build();
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
-        countryService.deleteById(id);
-        return ResponseEntity.noContent().build();
+    @DeleteMapping(ENDPOINT + "/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        countryService.delete(id);
+        return ok();
     }
 }
 
