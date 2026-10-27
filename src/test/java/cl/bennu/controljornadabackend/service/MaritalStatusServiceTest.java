@@ -55,13 +55,24 @@ class MaritalStatusServiceTest {
     }
 
     @Test
-    void saveMaritalStatus_llamaAlInsertDelMapper() {
-        MaritalStatus m = maritalStatus();
+    void saveMaritalStatus_sinId_llamaAlInsertDelMapper() {
+        MaritalStatus m = new MaritalStatus();
+        m.setName("Casado");
 
         maritalStatusService.save(m);
 
         verify(maritalStatusMapper).insert(m);
         verify(maritalStatusMapper, never()).update(any());
+    }
+
+    @Test
+    void saveMaritalStatus_conId_llamaAlUpdateDelMapper() {
+        MaritalStatus m = maritalStatus();
+
+        maritalStatusService.save(m);
+
+        verify(maritalStatusMapper).update(m);
+        verify(maritalStatusMapper, never()).insert(any());
     }
 
     @Test
