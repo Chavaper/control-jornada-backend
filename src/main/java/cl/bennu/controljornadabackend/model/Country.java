@@ -1,14 +1,24 @@
 package cl.bennu.controljornadabackend.model;
 
-import lombok.AllArgsConstructor;
+import cl.bennu.commons.domain.base.BaseDomain;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
+@EqualsAndHashCode(callSuper=true)
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-public class Country {
-    private Integer id;
+public class Country extends BaseDomain implements Serializable {
     private String name;
     private String nationality;
+
+    @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
+    public static Justification valueOf(Long id) {
+        Justification justification = new Justification();
+        justification.setId(id);
+        return justification;
+    }
 }
