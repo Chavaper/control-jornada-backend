@@ -11,8 +11,14 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class Commune extends BaseDomain implements Serializable {
+    // propiedades de entidad
     private Long cityId;
     private String name;
     private String siiCode; // código de comuna de SII (servicio de impuestos internos)
     private String tgrCode; // código de tesorería (Tesorería General de la República)
+    
+    // Propiedades de respuesta
+    private City city;
+    private Region region;
+    private Country country;
 }
