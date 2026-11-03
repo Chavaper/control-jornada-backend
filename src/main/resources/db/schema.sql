@@ -11,4 +11,7 @@ CREATE TABLE country (
 );
 
 INSERT INTO country (name, nationality) VALUES
-    ('Chile', 'Chilena');
+    ('Chile', 'Chilena'),
+    ('Peru', 'Peruana'),
+    ('Argentina', 'Argentina'),
+    ('Colombia','Colombiana')

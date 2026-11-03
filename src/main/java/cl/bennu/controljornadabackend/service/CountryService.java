@@ -28,6 +28,17 @@ public class CountryService {
         }
     }
 
+//    @Transactional
+//    public void insert(Country country) {
+//        countryMapper.insert(country);
+//    }
+//
+//    @Transactional
+//    public void update(Country country) {
+//        countryMapper.update(country);
+//    }
+
+
     public Country getById(Long id) {
         return countryMapper.get(id);
     }
