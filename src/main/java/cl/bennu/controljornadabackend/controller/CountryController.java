@@ -25,23 +25,24 @@ public class CountryController extends BaseController {
         return ok(list);
     }
 
+//    @PostMapping(ENDPOINT)
+//    public ResponseEntity<?> save(@RequestBody Country country) {
+//        countryService.save(country);
+//        return ok(country);
+//    }
+
     @PostMapping(ENDPOINT)
-    public ResponseEntity<?> save(@RequestBody Country country) {
-        countryService.save(country);
+    public ResponseEntity<?> insert(@RequestBody Country country) {
+        countryService.insert(country);
         return ok(country);
     }
 
-//    @PostMapping(ENDPOINT)
-//    public ResponseEntity<?> insert(@RequestBody Country country) {
-//        countryService.insert(country);
-//        return ok(country);
-//    }
-
-//    @PutMapping(ENDPOINT + "/id")
-//    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Country country) {
-//        countryService.update(id, country);
-//        return ok(country);
-//    }
+    @PutMapping(ENDPOINT + "/id")
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Country country) {
+        country.setId(id);
+        countryService.update(country);
+        return ok(country);
+    }
 
     @GetMapping(ENDPOINT + "/{id}")
     public ResponseEntity<?> getById(@PathVariable Long id) {
