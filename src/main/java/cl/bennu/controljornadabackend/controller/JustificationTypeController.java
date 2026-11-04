@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,25 +30,35 @@ public class JustificationTypeController extends BaseController {
 
     @GetMapping(ENDPOINT)
     public ResponseEntity<?> getAll() {
-        List<JustificationType> justTypes = justificationTypeService.getAllExamples();
+        List<JustificationType> justTypes = justificationTypeService.getAll();
         return ok(justTypes);
     }
 
     @PostMapping(ENDPOINT)
-    public ResponseEntity<?> save(@RequestBody JustificationType justTypes) {
-        justificationTypeService.save(justTypes);
+    public ResponseEntity<?> create(@RequestBody JustificationType justTypes) {
+        justificationTypeService.create(justTypes);
+        return ok(justTypes); // viene con el ID generado (autoGenerateKeys = true)
+    }
+
+    @PutMapping(ENDPOINT)
+    public ResponseEntity<?> update(@RequestBody JustificationType justTypes) {
+        justificationTypeService.update(justTypes);
         return ok(justTypes);
     }
 
     @GetMapping(ENDPOINT + "/{id}")
     public ResponseEntity<?> getById(@PathVariable Long id) {
-        JustificationType justType = justificationTypeService.getExampleById(id);
+        JustificationType justType = justificationTypeService.getById(id);
+        if(justType == null) {
+            return ResponseEntity.notFound().build();
+        }
+
         return ok(justType);
     }
 
     @DeleteMapping(ENDPOINT + "/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
-        justificationTypeService.deleteExample(id);
+        justificationTypeService.delete(id);
         return ok();
     }
 }
