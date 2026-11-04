@@ -3,6 +3,7 @@ package cl.bennu.controljornadabackend.model;
 import java.io.Serializable;
 
 import cl.bennu.commons.domain.base.BaseDomain;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -21,4 +22,12 @@ public class Commune extends BaseDomain implements Serializable {
     private City city;
     private Region region;
     private Country country;
+
+    @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
+    public static Commune valueOf(Long id) {
+        Commune o = new Commune();
+        o.setId(id);
+        return o;
+    }
+
 }
