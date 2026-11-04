@@ -33,7 +33,7 @@ public class EmployeeController extends BaseController {
         return ok(employee);
     }
 
-    @PutMapping(ENDPOINT + "/id")
+    @PutMapping(ENDPOINT + "/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Employee employee) {
         employee.setId(id);
         employeeService.update(employee);
